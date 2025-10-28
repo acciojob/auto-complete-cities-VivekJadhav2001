@@ -19,13 +19,13 @@ function AutocompleteCities({ suggestions }) {
     setFiltered(matches);
   };
 
-  const handleSelect = (e) => {
-    setInputValue(e.target.value);
+  const handleSelect = (city) => {
+    setInputValue(city);
     setFiltered([]);
   };
 
   return (
-    <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center gap-4">
+    <div>
       <p>Search cities of India</p>
 
       <input
@@ -33,21 +33,16 @@ function AutocompleteCities({ suggestions }) {
         value={inputValue}
         onChange={handleChange}
         placeholder="Type a city..."
-        className="border-white border-2 bg-white text-black p-2 w-[12vw]"
       />
 
       {filtered.length > 0 && (
-        <select
-          onChange={handleSelect}
-          size={filtered.length}
-          className="text-black bg-white border-2 border-white p-2 w-[12vw]"
-        >
-          {filtered.map((city, i) => (
-            <option key={i} value={city}>
+        <ul>
+          {filtered.map((city, index) => (
+            <li key={index} onClick={() => handleSelect(city)}>
               {city}
-            </option>
+            </li>
           ))}
-        </select>
+        </ul>
       )}
     </div>
   );
